@@ -3,61 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOCA | Document Architecture</title>
+    <title>DOCA | Document Oriented Compliance Architecture</title>
+    
     <link rel="icon" type="image/png" href="assets/logo.png">
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            600: '#4f46e5',
+                            800: '#3730a3',
+                            900: '#312e81',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased overflow-hidden">
+<body class="bg-slate-50 text-slate-800 font-sans antialiased overflow-hidden selection:bg-brand-100 selection:text-brand-900">
 
-    <nav class="fixed top-0 w-full z-50 bg-white border-b border-gray-200 h-16 flex items-center justify-between px-6 shadow-sm">
-        <div class="flex items-center gap-3">
-            <img src="assets/logo.png" alt="DOCA Logo" class="h-8 w-8 object-contain">
-            <div>
-                <h1 class="text-lg font-bold tracking-tighter text-slate-900 leading-none">DOCA</h1>
-                <p class="text-[10px] text-gray-400 font-medium uppercase tracking-widest">Compliance Architecture</p>
+    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-200 h-16 shadow-sm flex items-center justify-between px-4 md:px-6 transition-all duration-300">
+        <div class="flex items-center gap-4">
+            <button id="menu-toggle" class="md:hidden text-gray-500 hover:text-brand-900 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+            </button>
+            
+            <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.reload()">
+                <img src="assets/logo.png" alt="DOCA Logo" class="h-8 w-8 object-contain rounded-sm" onerror="this.style.display='none'">
+                <div>
+                    <h1 class="text-lg font-bold tracking-tight text-slate-900 leading-none">DOCA</h1>
+                    <p class="text-[10px] text-gray-500 font-medium tracking-wide uppercase mt-0.5">Compliance Engine v2.0</p>
+                </div>
             </div>
         </div>
 
-        <div class="flex items-center gap-8 text-sm font-semibold">
-            <a href="#" onclick="showLanding()" class="text-indigo-900 hover:opacity-75">Home</a>
-            <a href="#" class="text-gray-500 hover:text-indigo-900">Blueprint Library</a>
-            <div class="h-4 w-[1px] bg-gray-200"></div>
-            <button class="bg-slate-900 text-white px-4 py-2 rounded-md text-xs">New Document</button>
+        <div class="flex items-center gap-6 text-sm font-medium text-gray-600">
+            <div class="hidden md:flex gap-6">
+                <a href="#" class="hover:text-brand-800 transition-colors">Dashboard</a>
+                <a href="#" class="hover:text-brand-800 transition-colors">Templates</a>
+            </div>
+            <div class="h-8 w-8 bg-brand-50 text-brand-800 rounded-full flex items-center justify-center font-bold text-xs border border-brand-100">
+                US
+            </div>
         </div>
     </nav>
 
     <div class="flex h-screen pt-16">
-        <aside class="w-72 bg-white border-r border-gray-100 flex flex-col overflow-y-auto scrollbar-hide">
-            <div class="p-6 space-y-8" id="sidebar-nav">
-                <div>
-                    <h3 class="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-3">Core Professional</h3>
-                    <ul class="space-y-1 text-sm text-gray-600">
-                        <li class="hover:text-indigo-600 cursor-pointer py-1" onclick="loadDoc('White Paper')">White Paper</li>
-                        <li class="hover:text-indigo-600 cursor-pointer py-1" onclick="loadDoc('Research Paper')">Research Paper</li>
-                        <li class="hover:text-indigo-600 cursor-pointer py-1" onclick="loadDoc('Technical Report')">Technical Report</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-3">Career & Academic</h3>
-                    <ul class="space-y-1 text-sm text-gray-600">
-                        <li class="hover:text-indigo-600 cursor-pointer py-1" onclick="loadDoc('CV')">CV (Curriculum Vitae)</li>
-                        <li class="hover:text-indigo-600 cursor-pointer py-1" onclick="loadDoc('Resume')">Resume</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-3">Business & Corporate</h3>
-                    <ul class="space-y-1 text-sm text-gray-600">
-                        <li class="hover:text-indigo-600 cursor-pointer py-1" onclick="loadDoc('Business Plan')">Business Plan</li>
-                        <li class="hover:text-indigo-600 cursor-pointer py-1" onclick="loadDoc('Executive Summary')">Executive Summary</li>
-                    </ul>
-                </div>
+
+        <aside id="sidebar" class="fixed inset-y-0 left-0 transform -translate-x-full md:translate-x-0 md:relative md:flex md:w-80 bg-white border-r border-gray-200 h-full flex-col z-40 transition-transform duration-300 ease-out pt-16 md:pt-0 shadow-xl md:shadow-none">
+            
+            <div class="px-6 py-4 border-b border-gray-100 bg-white sticky top-0 z-10 flex justify-between items-center">
+                <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest">Blueprint Library</h2>
+                <span class="text-[10px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full font-mono" id="doc-count">0 Docs</span>
             </div>
+
+            <div id="sidebar-menu" class="flex-1 overflow-y-auto custom-scrollbar px-4 py-4 space-y-1 pb-24">
+                </div>
         </aside>
 
-        <main id="content-area" class="flex-1 overflow-y-auto p-12 bg-slate-50">
-            </main>
+        <div id="sidebar-overlay" class="fixed inset-0 bg-slate-900/50 z-30 hidden md:hidden backdrop-blur-sm transition-opacity"></div>
+
+        <main class="flex-1 overflow-y-auto bg-slate-50/50 p-6 md:p-12 relative w-full scroll-smooth">
+            <div id="main-view" class="max-w-6xl mx-auto min-h-[85vh] flex flex-col relative animate-fade-in">
+                </div>
+        </main>
     </div>
 
     <script src="index.js"></script>
