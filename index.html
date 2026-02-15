@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOCA | Document Oriented Compliance Architecture</title>
+    <title>DOCA | Modern Compliance Architecture</title>
     
     <link rel="icon" type="image/png" href="assets/logo.png">
 
@@ -22,11 +22,26 @@
                     },
                     colors: {
                         brand: {
-                            50: '#eef2ff',
-                            100: '#e0e7ff',
-                            600: '#4f46e5',
-                            800: '#3730a3',
-                            900: '#312e81',
+                            50: '#f0fdfa', /* Teal-ish tint for modern look */
+                            100: '#ccfbf1',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            900: '#134e4a',
+                            dark: '#0f172a'
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'slide-in': 'slideIn 0.3s ease-out forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        slideIn: {
+                            '0%': { opacity: '0', transform: 'translateX(-10px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' },
                         }
                     }
                 }
@@ -37,51 +52,56 @@
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased overflow-hidden selection:bg-brand-100 selection:text-brand-900">
 
-    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-200 h-16 shadow-sm flex items-center justify-between px-4 md:px-6 transition-all duration-300">
+    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-brand-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-float"></div>
+        <div class="absolute top-[20%] right-[-5%] w-72 h-72 bg-blue-50 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-float" style="animation-delay: 2s;"></div>
+    </div>
+
+    <nav class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-lg border-b border-slate-200/60 h-16 flex items-center justify-between px-4 md:px-6 transition-all duration-300">
         <div class="flex items-center gap-4">
-            <button id="menu-toggle" class="md:hidden text-gray-500 hover:text-brand-900 transition-colors">
+            <button id="menu-toggle" class="md:hidden text-slate-500 hover:text-brand-900 transition-colors p-1 rounded-md hover:bg-slate-100">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                 </svg>
             </button>
             
-            <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.reload()">
-                <img src="assets/logo.png" alt="DOCA Logo" class="h-8 w-8 object-contain rounded-sm" onerror="this.style.display='none'">
+            <div class="flex items-center gap-3 cursor-pointer group" onclick="window.location.reload()">
+                <div class="relative">
+                    <div class="absolute inset-0 bg-brand-500 blur opacity-20 rounded-full group-hover:opacity-40 transition-opacity"></div>
+                    <img src="assets/logo.png" alt="DOCA Logo" class="relative h-9 w-9 object-contain rounded-lg shadow-sm" onerror="this.src='https://via.placeholder.com/40?text=D'">
+                </div>
                 <div>
-                    <h1 class="text-lg font-bold tracking-tight text-slate-900 leading-none">DOCA</h1>
-                    <p class="text-[10px] text-gray-500 font-medium tracking-wide uppercase mt-0.5">Compliance Engine v2.0</p>
+                    <h1 class="text-lg font-bold tracking-tight text-slate-900 leading-none group-hover:text-brand-600 transition-colors">DOCA</h1>
+                    <p class="text-[10px] text-slate-400 font-medium tracking-wide uppercase mt-0.5">Compliance Engine</p>
                 </div>
             </div>
         </div>
 
-        <div class="flex items-center gap-6 text-sm font-medium text-gray-600">
-            <div class="hidden md:flex gap-6">
-                <a href="#" class="hover:text-brand-800 transition-colors">Dashboard</a>
-                <a href="#" class="hover:text-brand-800 transition-colors">Templates</a>
-            </div>
-            <div class="h-8 w-8 bg-brand-50 text-brand-800 rounded-full flex items-center justify-center font-bold text-xs border border-brand-100">
-                US
-            </div>
+        <div class="flex items-center gap-4">
+            <span class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100/50 border border-slate-200 text-[11px] font-semibold text-slate-500">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                System Operational
+            </span>
         </div>
     </nav>
 
-    <div class="flex h-screen pt-16">
+    <div class="flex h-screen pt-16 relative z-10">
 
-        <aside id="sidebar" class="fixed inset-y-0 left-0 transform -translate-x-full md:translate-x-0 md:relative md:flex md:w-80 bg-white border-r border-gray-200 h-full flex-col z-40 transition-transform duration-300 ease-out pt-16 md:pt-0 shadow-xl md:shadow-none">
+        <aside id="sidebar" class="fixed inset-y-0 left-0 transform -translate-x-full md:translate-x-0 md:relative md:flex md:w-[320px] bg-white/80 backdrop-blur-md border-r border-slate-200 h-full flex-col z-40 transition-transform duration-300 ease-out pt-16 md:pt-0 shadow-2xl md:shadow-none">
             
-            <div class="px-6 py-4 border-b border-gray-100 bg-white sticky top-0 z-10 flex justify-between items-center">
-                <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest">Blueprint Library</h2>
-                <span class="text-[10px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full font-mono" id="doc-count">0 Docs</span>
+            <div class="px-6 py-5 border-b border-slate-100 flex justify-between items-center bg-white/50">
+                <h2 class="text-[11px] font-bold text-slate-400 uppercase tracking-widest">Document Library</h2>
+                <span class="text-[10px] bg-slate-100 text-slate-500 px-2 py-0.5 rounded-md font-mono border border-slate-200" id="doc-count">0 Docs</span>
             </div>
 
-            <div id="sidebar-menu" class="flex-1 overflow-y-auto custom-scrollbar px-4 py-4 space-y-1 pb-24">
+            <div id="sidebar-menu" class="flex-1 overflow-y-auto custom-scrollbar px-4 py-4 space-y-2 pb-24">
                 </div>
         </aside>
 
-        <div id="sidebar-overlay" class="fixed inset-0 bg-slate-900/50 z-30 hidden md:hidden backdrop-blur-sm transition-opacity"></div>
+        <div id="sidebar-overlay" class="fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-30 hidden md:hidden transition-opacity"></div>
 
-        <main class="flex-1 overflow-y-auto bg-slate-50/50 p-6 md:p-12 relative w-full scroll-smooth">
-            <div id="main-view" class="max-w-6xl mx-auto min-h-[85vh] flex flex-col relative animate-fade-in">
+        <main class="flex-1 overflow-y-auto p-6 md:p-12 relative w-full scroll-smooth">
+            <div id="main-view" class="max-w-5xl mx-auto min-h-[85vh] flex flex-col relative animate-fade-in">
                 </div>
         </main>
     </div>
