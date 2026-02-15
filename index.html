@@ -3,331 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOCA | Document Oriented Compliance Architecture</title>
-    
+    <title>DOCA | Document Architecture</title>
+    <link rel="icon" type="image/png" href="assets/logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
-                    },
-                    colors: {
-                        slate: {
-                            50: '#f8fafc',  /* Institutional Background */
-                            800: '#1e293b', /* Main Text */
-                            900: '#0f172a',
-                        },
-                        indigo: {
-                            800: '#3730a3', /* Brand Accent */
-                            900: '#312e81', /* Deep Navy */
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-
-    <style>
-        /* Custom Scrollbar for the sidebar to maintain cleanliness */
-        .scrollbar-hide::-webkit-scrollbar {
-            width: 4px;
-        }
-        .scrollbar-hide::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        .scrollbar-hide::-webkit-scrollbar-thumb {
-            background-color: #cbd5e1;
-            border-radius: 20px;
-        }
-        
-        /* Utility for sidebar transition */
-        .sidebar-transition {
-            transition: transform 0.3s ease-in-out;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased overflow-hidden">
 
-    <nav class="fixed top-0 w-full z-50 bg-white border-b border-gray-200 h-16 shadow-sm flex items-center justify-between px-4 md:px-8">
-        <div class="flex items-center gap-4">
-            <button onclick="toggleSidebar()" class="md:hidden text-gray-500 hover:text-indigo-900">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                </svg>
-            </button>
-            
+    <nav class="fixed top-0 w-full z-50 bg-white border-b border-gray-200 h-16 flex items-center justify-between px-6 shadow-sm">
+        <div class="flex items-center gap-3">
+            <img src="assets/logo.png" alt="DOCA Logo" class="h-8 w-8 object-contain">
             <div>
-                <h1 class="text-xl font-bold tracking-wide uppercase text-slate-900 leading-none">DOCA</h1>
-                <p class="text-[10px] text-gray-500 font-medium tracking-wider mt-0.5">Document Oriented Compliance Architecture</p>
+                <h1 class="text-lg font-bold tracking-tighter text-slate-900 leading-none">DOCA</h1>
+                <p class="text-[10px] text-gray-400 font-medium uppercase tracking-widest">Compliance Architecture</p>
             </div>
         </div>
 
-        <div class="hidden md:block"></div>
-
-        <div class="flex items-center gap-6 text-sm font-medium text-gray-600">
-            <a href="#" class="hover:text-indigo-900 transition-colors">Home</a>
-            <a href="#" class="hover:text-indigo-900 transition-colors">Blueprint Library</a>
-            <a href="#" class="hover:text-indigo-900 transition-colors hidden sm:block">Structural Compare</a>
-            <a href="#" class="hover:text-indigo-900 transition-colors text-indigo-800 border-b border-indigo-800 pb-0.5">Compliance Mode</a>
+        <div class="flex items-center gap-8 text-sm font-semibold">
+            <a href="#" onclick="showLanding()" class="text-indigo-900 hover:opacity-75">Home</a>
+            <a href="#" class="text-gray-500 hover:text-indigo-900">Blueprint Library</a>
+            <div class="h-4 w-[1px] bg-gray-200"></div>
+            <button class="bg-slate-900 text-white px-4 py-2 rounded-md text-xs">New Document</button>
         </div>
     </nav>
 
     <div class="flex h-screen pt-16">
-
-        <aside id="sidebar" class="fixed inset-y-0 left-0 transform -translate-x-full md:translate-x-0 md:relative md:flex md:w-72 bg-white border-r border-gray-200 h-full flex-col z-40 sidebar-transition pt-16 md:pt-0">
-            
-            <div class="px-6 py-4 border-b border-gray-100 bg-white sticky top-0 z-10">
-                <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest">Document Library</h2>
-            </div>
-
-            <div class="flex-1 overflow-y-auto scrollbar-hide px-4 py-4 space-y-6 pb-20">
-
-                <div class="group">
-                    <h3 class="px-2 text-xs font-bold text-gray-800 uppercase mb-2 border-b border-gray-100 pb-1 cursor-pointer" onclick="toggleGroup('core')">
-                        Core Professional Documents
-                    </h3>
-                    <ul id="core" class="space-y-1">
-                        <li><button onclick="selectDoc(this)" class="w-full text-left px-3 py-1.5 text-sm text-gray-600 rounded hover:bg-slate-50 hover:text-indigo-900 hover:border-l-2 hover:border-indigo-800 transition-all">White Paper</button></li>
-                        <li><button onclick="selectDoc(this)" class="w-full text-left px-3 py-1.5 text-sm text-gray-600 rounded hover:bg-slate-50 hover:text-indigo-900 hover:border-l-2 hover:border-indigo-800 transition-all">Research Paper</button></li>
-                        <li><button onclick="selectDoc(this)" class="w-full text-left px-3 py-1.5 text-sm text-gray-600 rounded hover:bg-slate-50 hover:text-indigo-900 hover:border-l-2 hover:border-indigo-800 transition-all">Technical Report</button></li>
-                        <li><button onclick="selectDoc(this)" class="w-full text-left px-3 py-1.5 text-sm text-gray-600 rounded hover:bg-slate-50 hover:text-indigo-900 hover:border-l-2 hover:border-indigo-800 transition-all">Case Study</button></li>
-                        <li><button onclick="selectDoc(this)" class="w-full text-left px-3 py-1.5 text-sm text-gray-600 rounded hover:bg-slate-50 hover:text-indigo-900 hover:border-l-2 hover:border-indigo-800 transition-all">Impact Assessment</button></li>
-                        <li><button onclick="selectDoc(this)" class="w-full text-left px-3 py-1.5 text-sm text-gray-600 rounded hover:bg-slate-50 hover:text-indigo-900 hover:border-l-2 hover:border-indigo-800 transition-all">Policy Brief</button></li>
+        <aside class="w-72 bg-white border-r border-gray-100 flex flex-col overflow-y-auto scrollbar-hide">
+            <div class="p-6 space-y-8" id="sidebar-nav">
+                <div>
+                    <h3 class="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-3">Core Professional</h3>
+                    <ul class="space-y-1 text-sm text-gray-600">
+                        <li class="hover:text-indigo-600 cursor-pointer py-1" onclick="loadDoc('White Paper')">White Paper</li>
+                        <li class="hover:text-indigo-600 cursor-pointer py-1" onclick="loadDoc('Research Paper')">Research Paper</li>
+                        <li class="hover:text-indigo-600 cursor-pointer py-1" onclick="loadDoc('Technical Report')">Technical Report</li>
                     </ul>
                 </div>
-
-                <div class="group">
-                    <h3 class="px-2 text-xs font-bold text-gray-800 uppercase mb-2 border-b border-gray-100 pb-1 cursor-pointer" onclick="toggleGroup('career')">
-                        Career & Academic
-                    </h3>
-                    <ul id="career" class="space-y-1">
-                        <li><button onclick="selectDoc(this)" class="w-full text-left px-3 py-1.5 text-sm text-gray-600 rounded hover:bg-slate-50 hover:text-indigo-900 hover:border-l-2 hover:border-indigo-800 transition-all">CV / Resume</button></li>
-                        <li><button onclick="selectDoc(this)" class="w-full text-left px-3 py-1.5 text-sm text-gray-600 rounded hover:bg-slate-50 hover:text-indigo-900 hover:border-l-2 hover:border-indigo-800 transition-all">Statement of Purpose</button></li>
-                        <li><button onclick="selectDoc(this)" class="w-full text-left px-3 py-1.5 text-sm text-gray-600 rounded hover:bg-slate-50 hover:text-indigo-900 hover:border-l-2 hover:border-indigo-800 transition-all">Cover Letter</button></li>
-                        <li><button onclick="selectDoc(this)" class="w-full text-left px-3 py-1.5 text-sm text-gray-600 rounded hover:bg-slate-50 hover:text-indigo-900 hover:border-l-2 hover:border-indigo-800 transition-all">Research Proposal</button></li>
-                        <li><button onclick="selectDoc(this)" class="w-full text-left px-3 py-1.5 text-sm text-gray-600 rounded hover:bg-slate-50 hover:text-indigo-900 hover:border-l-2 hover:border-indigo-800 transition-all">Thesis Proposal</button></li>
+                <div>
+                    <h3 class="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-3">Career & Academic</h3>
+                    <ul class="space-y-1 text-sm text-gray-600">
+                        <li class="hover:text-indigo-600 cursor-pointer py-1" onclick="loadDoc('CV')">CV (Curriculum Vitae)</li>
+                        <li class="hover:text-indigo-600 cursor-pointer py-1" onclick="loadDoc('Resume')">Resume</li>
                     </ul>
                 </div>
-
-                <div class="group">
-                    <h3 class="px-2 text-xs font-bold text-gray-800 uppercase mb-2 border-b border-gray-100 pb-1 cursor-pointer" onclick="toggleGroup('business')">
-                        Business & Corporate
-                    </h3>
-                    <ul id="business" class="space-y-1">
-                        <li><button onclick="selectDoc(this)" class="w-full text-left px-3 py-1.5 text-sm text-gray-600 rounded hover:bg-slate-50 hover:text-indigo-900 hover:border-l-2 hover:border-indigo-800 transition-all">Business Plan</button></li>
-                        <li><button onclick="selectDoc(this)" class="w-full text-left px-3 py-1.5 text-sm text-gray-600 rounded hover:bg-slate-50 hover:text-indigo-900 hover:border-l-2 hover:border-indigo-800 transition-all">Executive Summary</button></li>
-                        <li><button onclick="selectDoc(this)" class="w-full text-left px-3 py-1.5 text-sm text-gray-600 rounded hover:bg-slate-50 hover:text-indigo-900 hover:border-l-2 hover:border-indigo-800 transition-all">Market Analysis</button></li>
-                        <li><button onclick="selectDoc(this)" class="w-full text-left px-3 py-1.5 text-sm text-gray-600 rounded hover:bg-slate-50 hover:text-indigo-900 hover:border-l-2 hover:border-indigo-800 transition-all">Project Charter</button></li>
-                        <li><button onclick="selectDoc(this)" class="w-full text-left px-3 py-1.5 text-sm text-gray-600 rounded hover:bg-slate-50 hover:text-indigo-900 hover:border-l-2 hover:border-indigo-800 transition-all">Strategic Plan</button></li>
+                <div>
+                    <h3 class="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-3">Business & Corporate</h3>
+                    <ul class="space-y-1 text-sm text-gray-600">
+                        <li class="hover:text-indigo-600 cursor-pointer py-1" onclick="loadDoc('Business Plan')">Business Plan</li>
+                        <li class="hover:text-indigo-600 cursor-pointer py-1" onclick="loadDoc('Executive Summary')">Executive Summary</li>
                     </ul>
                 </div>
-
-                 <div class="group">
-                    <h3 class="px-2 text-xs font-bold text-gray-800 uppercase mb-2 border-b border-gray-100 pb-1 cursor-pointer" onclick="toggleGroup('legal')">
-                        Legal & Compliance
-                    </h3>
-                    <ul id="legal" class="space-y-1">
-                        <li><button onclick="selectDoc(this)" class="w-full text-left px-3 py-1.5 text-sm text-gray-600 rounded hover:bg-slate-50 hover:text-indigo-900 hover:border-l-2 hover:border-indigo-800 transition-all">Contract Agreement</button></li>
-                        <li><button onclick="selectDoc(this)" class="w-full text-left px-3 py-1.5 text-sm text-gray-600 rounded hover:bg-slate-50 hover:text-indigo-900 hover:border-l-2 hover:border-indigo-800 transition-all">NDA</button></li>
-                        <li><button onclick="selectDoc(this)" class="w-full text-left px-3 py-1.5 text-sm text-gray-600 rounded hover:bg-slate-50 hover:text-indigo-900 hover:border-l-2 hover:border-indigo-800 transition-all">SLA</button></li>
-                        <li><button onclick="selectDoc(this)" class="w-full text-left px-3 py-1.5 text-sm text-gray-600 rounded hover:bg-slate-50 hover:text-indigo-900 hover:border-l-2 hover:border-indigo-800 transition-all">Privacy Policy</button></li>
-                        <li><button onclick="selectDoc(this)" class="w-full text-left px-3 py-1.5 text-sm text-gray-600 rounded hover:bg-slate-50 hover:text-indigo-900 hover:border-l-2 hover:border-indigo-800 transition-all">MOU</button></li>
-                    </ul>
-                </div>
-
-                <div class="group mt-6">
-                    <h3 class="px-2 text-xs font-bold text-indigo-900 uppercase mb-2 border-b border-indigo-100 pb-1 cursor-pointer" onclick="toggleGroup('compare')">
-                        Structural Comparison
-                    </h3>
-                    <ul id="compare" class="space-y-1">
-                        <li><button onclick="selectDoc(this)" class="w-full text-left px-3 py-1.5 text-sm text-indigo-700 bg-indigo-50/50 rounded hover:bg-indigo-100 transition-all">CV vs Resume</button></li>
-                        <li><button onclick="selectDoc(this)" class="w-full text-left px-3 py-1.5 text-sm text-indigo-700 bg-indigo-50/50 rounded hover:bg-indigo-100 transition-all">White Paper vs Research</button></li>
-                        <li><button onclick="selectDoc(this)" class="w-full text-left px-3 py-1.5 text-sm text-indigo-700 bg-indigo-50/50 rounded hover:bg-indigo-100 transition-all">Grant vs Business Proposal</button></li>
-                    </ul>
-                </div>
-
             </div>
         </aside>
 
-        <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-gray-900 bg-opacity-50 z-30 hidden md:hidden"></div>
-
-        <main class="flex-1 overflow-y-auto bg-slate-50 p-6 md:p-12 relative w-full">
-            
-            <div class="max-w-5xl mx-auto min-h-[80vh] flex flex-col justify-between">
-                
-                <div id="main-view" class="flex flex-col items-center justify-center text-center flex-grow">
-                    
-                    <div class="mb-8">
-                        <span class="inline-block p-3 rounded-full bg-white shadow-sm mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="#312e81" class="w-8 h-8">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-                            </svg>
-                        </span>
-                        <h2 class="text-3xl font-bold text-slate-800 tracking-tight mb-2">Welcome to DOCA</h2>
-                        <p class="text-gray-500 text-lg max-w-lg mx-auto">Select a document type from the library to generate a structural blueprint.</p>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl">
-                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 text-left hover:shadow-md transition-shadow">
-                            <div class="h-10 w-10 bg-slate-100 rounded flex items-center justify-center mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#1e293b" class="w-5 h-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                            </div>
-                            <h3 class="font-semibold text-slate-800 mb-2">Structural Validation</h3>
-                            <p class="text-sm text-gray-500 leading-relaxed">Ensure all mandatory sections are present before writing content.</p>
-                        </div>
-
-                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 text-left hover:shadow-md transition-shadow">
-                            <div class="h-10 w-10 bg-slate-100 rounded flex items-center justify-center mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#1e293b" class="w-5 h-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
-                                </svg>
-                            </div>
-                            <h3 class="font-semibold text-slate-800 mb-2">Compliance Mapping</h3>
-                            <p class="text-sm text-gray-500 leading-relaxed">Adhere to institutional standards and regulatory formatting rules.</p>
-                        </div>
-
-                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 text-left hover:shadow-md transition-shadow">
-                            <div class="h-10 w-10 bg-slate-100 rounded flex items-center justify-center mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#1e293b" class="w-5 h-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
-                                </svg>
-                            </div>
-                            <h3 class="font-semibold text-slate-800 mb-2">Blueprint Export</h3>
-                            <p class="text-sm text-gray-500 leading-relaxed">Download empty structural skeletons in JSON, Markdown, or PDF.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <footer class="mt-12 pt-6 border-t border-gray-200 text-center w-full">
-                    <p class="text-xs text-gray-400 font-medium tracking-wide">DOCA &mdash; STRUCTURE BEFORE SUBSTANCE</p>
-                </footer>
-            
-            </div>
-        </main>
+        <main id="content-area" class="flex-1 overflow-y-auto p-12 bg-slate-50">
+            </main>
     </div>
 
-    <script>
-        // 1. Sidebar Toggle (Mobile)
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.getElementById('sidebar-overlay');
-        const content = document.getElementById('main-view');
-
-        function toggleSidebar() {
-            if (sidebar.classList.contains('-translate-x-full')) {
-                sidebar.classList.remove('-translate-x-full');
-                overlay.classList.remove('hidden');
-            } else {
-                sidebar.classList.add('-translate-x-full');
-                overlay.classList.add('hidden');
-            }
-        }
-
-        // 2. Accordion Logic
-        function toggleGroup(id) {
-            const list = document.getElementById(id);
-            // In a real app, this might animate height
-            if (list.classList.contains('hidden')) {
-                list.classList.remove('hidden');
-            } else {
-                // list.classList.add('hidden'); // Optional: keep open for now for easier browsing
-            }
-        }
-
-        // 3. Selection & SPA Content Update Logic
-        function selectDoc(element) {
-            // Remove active classes from all buttons
-            document.querySelectorAll('button').forEach(btn => {
-                btn.classList.remove('bg-indigo-50', 'text-indigo-900', 'border-l-4', 'border-indigo-800', 'font-semibold');
-                if(btn.classList.contains('text-left')) btn.classList.add('text-gray-600');
-            });
-
-            // Add active class to clicked button
-            element.classList.remove('text-gray-600', 'hover:border-l-2');
-            element.classList.add('bg-indigo-50', 'text-indigo-900', 'border-l-4', 'border-indigo-800', 'font-semibold');
-
-            // Close sidebar on mobile after selection
-            if(window.innerWidth < 768) {
-                toggleSidebar();
-            }
-
-            // Simulate loading a new view
-            const docName = element.innerText;
-            updateMainContent(docName);
-        }
-
-        function updateMainContent(docName) {
-            const container = document.getElementById('main-view');
-            
-            // This is the "Blueprint Interface" placeholder
-            container.innerHTML = `
-                <div class="w-full max-w-4xl animate-fade-in-up">
-                    <div class="flex items-center justify-between mb-6 border-b border-gray-200 pb-4">
-                        <div>
-                            <h2 class="text-2xl font-bold text-slate-800">${docName}</h2>
-                            <span class="text-xs font-mono text-indigo-800 bg-indigo-50 px-2 py-1 rounded mt-1 inline-block">DOC-ID: ${Math.floor(Math.random() * 9000) + 1000}</span>
-                        </div>
-                        <div class="flex gap-2">
-                            <button class="px-4 py-2 bg-white border border-gray-300 text-xs font-semibold rounded hover:bg-gray-50">Export JSON</button>
-                            <button class="px-4 py-2 bg-indigo-900 text-white text-xs font-semibold rounded hover:bg-indigo-800">Generate Structure</button>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="md:col-span-2 space-y-4">
-                            <div class="bg-white p-6 rounded border border-gray-200 shadow-sm">
-                                <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Required Sections</h4>
-                                <ul class="space-y-3">
-                                    <li class="flex items-center gap-3 p-2 bg-slate-50 border-l-2 border-indigo-500 text-sm font-medium text-slate-700">
-                                        <span class="text-gray-400">01.</span> Abstract / Executive Summary
-                                    </li>
-                                    <li class="flex items-center gap-3 p-2 bg-slate-50 border-l-2 border-indigo-500 text-sm font-medium text-slate-700">
-                                        <span class="text-gray-400">02.</span> Introduction & Background
-                                    </li>
-                                    <li class="flex items-center gap-3 p-2 bg-slate-50 border-l-2 border-indigo-500 text-sm font-medium text-slate-700">
-                                        <span class="text-gray-400">03.</span> Methodology / Approach
-                                    </li>
-                                    <li class="flex items-center gap-3 p-2 bg-slate-50 border-l-2 border-indigo-500 text-sm font-medium text-slate-700">
-                                        <span class="text-gray-400">04.</span> Analysis / Body
-                                    </li>
-                                    <li class="flex items-center gap-3 p-2 bg-slate-50 border-l-2 border-indigo-500 text-sm font-medium text-slate-700">
-                                        <span class="text-gray-400">05.</span> Conclusion & Recommendations
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="space-y-4">
-                            <div class="bg-white p-5 rounded border border-gray-200 shadow-sm">
-                                <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Forbidden Elements</h4>
-                                <ul class="text-sm text-red-600 space-y-2">
-                                    <li class="flex items-start gap-2">
-                                        <span>&times;</span> First-person narration
-                                    </li>
-                                    <li class="flex items-start gap-2">
-                                        <span>&times;</span> Uncited statistics
-                                    </li>
-                                </ul>
-                            </div>
-                            
-                            <div class="bg-indigo-50 p-5 rounded border border-indigo-100">
-                                <h4 class="text-xs font-bold text-indigo-800 uppercase tracking-widest mb-2">Tone Guide</h4>
-                                <p class="text-xs text-indigo-900 leading-relaxed">
-                                    Formal, objective, and evidence-based. Avoid colloquialisms.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-    </script>
-    <script src="app.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
