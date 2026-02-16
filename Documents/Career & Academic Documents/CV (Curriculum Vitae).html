@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal ATS-Optimized CV Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Strict Black and White Enforcement & Print Logic */
+        body {
+            background-color: #ffffff;
+            color: #000000;
+        }
+        .active-tab {
+            background-color: #000000;
+            color: #ffffff;
+        }
+        .inactive-tab {
+            background-color: #ffffff;
+            color: #000000;
+        }
+        .inactive-tab:hover {
+            background-color: #f3f4f6; /* Very light gray for hover hint only */
+        }
+        /* Hide scrollbar for cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fff; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #000; 
+        }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen flex flex-col">
+
+    <div class="max-w-5xl mx-auto w-full p-6 flex-grow">
+        
+        <header class="mb-8 border-b-4 border-black pb-4">
+            <h1 class="text-4xl font-bold uppercase tracking-tight">Universal ATS-Optimized CV Guide</h1>
+            <p class="text-lg mt-2 font-medium">Designed to pass AI screening systems (Workday, Greenhouse, Lever, Taleo)</p>
+            <p class="text-sm mt-1 italic">Applicable for: Business, Finance, Healthcare, Engineering, Tech, Marketing, Entry-level, and more.</p>
+        </header>
+
+        <nav class="mb-8">
+            <ul class="flex flex-wrap border-2 border-black divide-x-2 divide-black">
+                <li class="flex-1">
+                    <button onclick="switchTab('structure')" id="btn-structure" class="w-full py-3 px-4 font-bold uppercase text-sm active-tab transition-colors duration-200">
+                        1. Structure
+                    </button>
+                </li>
+                <li class="flex-1">
+                    <button onclick="switchTab('include')" id="btn-include" class="w-full py-3 px-4 font-bold uppercase text-sm inactive-tab transition-colors duration-200">
+                        2. Must Include
+                    </button>
+                </li>
+                <li class="flex-1">
+                    <button onclick="switchTab('dont-include')" id="btn-dont-include" class="w-full py-3 px-4 font-bold uppercase text-sm inactive-tab transition-colors duration-200">
+                        3. Don't Include
+                    </button>
+                </li>
+                <li class="flex-1">
+                    <button onclick="switchTab('layout')" id="btn-layout" class="w-full py-3 px-4 font-bold uppercase text-sm inactive-tab transition-colors duration-200">
+                        4. Page Layout
+                    </button>
+                </li>
+                <li class="flex-1">
+                    <button onclick="switchTab('format')" id="btn-format" class="w-full py-3 px-4 font-bold uppercase text-sm inactive-tab transition-colors duration-200">
+                        5. Page Format
+                    </button>
+                </li>
+            </ul>
+        </nav>
+
+        <main class="border-l-2 border-black pl-6 min-h-[500px]">
+
+            <div id="structure" class="tab-content block">
+                <h2 class="text-2xl font-bold mb-4 uppercase underline decoration-2 underline-offset-4">Universal CV Structure (AI-Safe Order)</h2>
+                <p class="mb-4 text-lg">Use this exact order for maximum compatibility:</p>
+                <ol class="list-decimal list-inside space-y-2 text-lg font-medium border-l-4 border-black pl-4">
+                    <li>Header</li>
+                    <li>Professional Summary</li>
+                    <li>Core Competencies / Skills</li>
+                    <li>Work Experience</li>
+                    <li>Education</li>
+                    <li>Certifications / Training</li>
+                    <li>Additional Information (Optional)</li>
+                </ol>
+            </div>
+
+            <div id="include" class="tab-content hidden">
+                <h2 class="text-2xl font-bold mb-6 uppercase underline decoration-2 underline-offset-4">What To Include</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">Header Details</h3>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li>Full Name (bold, largest text)</li>
+                            <li>Professional Title (match job role)</li>
+                            <li>Phone (international format)</li>
+                            <li>Professional email</li>
+                            <li>LinkedIn (optional but recommended)</li>
+                            <li>City, Country</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">Professional Summary Formula</h3>
+                        <div class="border border-black p-3 text-sm">
+                            [Job Title] + [Years of Exp] + [Core Strengths] + [Value] + [Measurable Achievement]
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="my-6 border-black border-dashed">
+
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold mb-2">Core Competencies (Keywords)</h3>
+                    <p class="mb-2 text-sm italic">Use keywords exactly as written in the job description.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="border border-black p-4">
+                            <h4 class="font-bold border-b border-black mb-2">Technical</h4>
+                            <ul class="text-sm space-y-1">
+                                <li>Microsoft Excel</li>
+                                <li>CRM Systems</li>
+                                <li>Data Entry</li>
+                                <li>Inventory Management</li>
+                            </ul>
+                        </div>
+                        <div class="border border-black p-4">
+                            <h4 class="font-bold border-b border-black mb-2">Professional</h4>
+                            <ul class="text-sm space-y-1">
+                                <li>Communication</li>
+                                <li>Team Collaboration</li>
+                                <li>Time Management</li>
+                                <li>Problem Solving</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold mb-2">Work Experience (Critical)</h3>
+                    <p class="mb-2 font-medium">Format: Job Title | Company | Month Year – Month Year</p>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>Start bullets with <span class="font-bold">Strong Action Verbs</span> (Managed, Led, Increased, Analyzed).</li>
+                        <li>Show <span class="font-bold">Measurable Results</span> (Reduced processing time by 30%).</li>
+                        <li>Focus on impact, not duties.</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-2">Education & Certifications</h3>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Degree / Certification Name</li>
+                        <li>Institution / Issuing Body</li>
+                        <li>Year</li>
+                        <li>Optional: GPA (if strong), Relevant coursework</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="dont-include" class="tab-content hidden">
+                <h2 class="text-2xl font-bold mb-6 uppercase underline decoration-2 underline-offset-4">Do NOT Include / Rejection Triggers</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white border-2 border-black p-4">
+                        <h3 class="text-xl font-bold mb-3">Header Exclusions</h3>
+                        <ul class="list-disc list-inside space-y-2 text-red-900 filter grayscale">
+                            <li class="line-through decoration-2">Photo (unless legally required)</li>
+                            <li class="line-through decoration-2">Age / Date of birth</li>
+                            <li class="line-through decoration-2">Religion</li>
+                            <li class="line-through decoration-2">Marital status</li>
+                            <li class="line-through decoration-2">National ID</li>
+                            <li class="line-through decoration-2">Gender</li>
+                            <li class="line-through decoration-2">Full home address</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white border-2 border-black p-4">
+                        <h3 class="text-xl font-bold mb-3">What Causes AI Rejection</h3>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li>Missing keywords</li>
+                            <li>Over-designed layout</li>
+                            <li>No measurable results</li>
+                            <li>Job titles unclear</li>
+                            <li>Dates missing</li>
+                            <li>Keyword stuffing</li>
+                            <li>Unreadable fonts</li>
+                            <li>Experience not aligned with job</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-6 border border-black p-4">
+                    <h3 class="text-xl font-bold mb-2">Optional Sections Warning</h3>
+                    <p>Only include Languages, Volunteer Experience, or Awards if relevant. <span class="font-bold">Do not add irrelevant sections just to fill space.</span></p>
+                </div>
+            </div>
+
+            <div id="layout" class="tab-content hidden">
+                <h2 class="text-2xl font-bold mb-6 uppercase underline decoration-2 underline-offset-4">Page Layout Rules</h2>
+                
+                <div class="flex flex-col space-y-6">
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">Structure Constraints</h3>
+                        <ul class="list-none space-y-2">
+                            <li class="flex items-center"><span class="mr-2 text-xl">✔</span> Single column</li>
+                            <li class="flex items-center"><span class="mr-2 text-xl">✔</span> Left aligned</li>
+                            <li class="flex items-center"><span class="mr-2 text-xl">✖</span> No tables</li>
+                            <li class="flex items-center"><span class="mr-2 text-xl">✖</span> No text boxes</li>
+                            <li class="flex items-center"><span class="mr-2 text-xl">✖</span> No graphics or icons</li>
+                            <li class="flex items-center"><span class="mr-2 text-xl">✖</span> No headers/footers with important info</li>
+                        </ul>
+                    </div>
+
+                    <div class="border-t-2 border-black pt-4">
+                        <h3 class="text-xl font-bold mb-2">Margins & Length</h3>
+                        <table class="w-full border border-black text-left border-collapse">
+                            <tr>
+                                <th class="border border-black p-2">Setting</th>
+                                <th class="border border-black p-2">Value</th>
+                            </tr>
+                            <tr>
+                                <td class="border border-black p-2">Margins</td>
+                                <td class="border border-black p-2">0.5 – 1 inch</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-black p-2">Students / Entry</td>
+                                <td class="border border-black p-2">1 page</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-black p-2">Mid-level</td>
+                                <td class="border border-black p-2">1–2 pages</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-black p-2">Senior</td>
+                                <td class="border border-black p-2">Max 2 pages (rarely 3)</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="format" class="tab-content hidden">
+                <h2 class="text-2xl font-bold mb-6 uppercase underline decoration-2 underline-offset-4">Formatting & Final Checklist</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">Typography & Files</h3>
+                        <p class="font-bold mt-2">Preferred Fonts:</p>
+                        <ul class="list-disc list-inside">
+                            <li>Calibri</li>
+                            <li>Arial</li>
+                            <li>Helvetica</li>
+                            <li>Times New Roman</li>
+                        </ul>
+                        
+                        <p class="font-bold mt-4">Font Sizes:</p>
+                        <ul class="list-disc list-inside">
+                            <li>Name: 16–18pt</li>
+                            <li>Headings: 12–14pt</li>
+                            <li>Body: 10–11pt</li>
+                        </ul>
+
+                        <p class="font-bold mt-4">File Type:</p>
+                        <p>Best: .docx <br>Second: Clean exported PDF <br>Avoid: Scanned PDF, Canva complex layouts.</p>
+                    </div>
+
+                    <div class="border-2 border-black p-4">
+                        <h3 class="text-xl font-bold mb-4 uppercase">Final Universal Checklist</h3>
+                        <ul class="space-y-2">
+                            <li class="flex items-start"><span class="mr-2">✔</span> Job title matches job posting</li>
+                            <li class="flex items-start"><span class="mr-2">✔</span> Keywords aligned with description</li>
+                            <li class="flex items-start"><span class="mr-2">✔</span> Clear employment dates</li>
+                            <li class="flex items-start"><span class="mr-2">✔</span> Measurable results included</li>
+                            <li class="flex items-start"><span class="mr-2">✔</span> No personal sensitive data</li>
+                            <li class="flex items-start"><span class="mr-2">✔</span> No grammar errors</li>
+                            <li class="flex items-start"><span class="mr-2">✔</span> Saved as .docx</li>
+                            <li class="flex items-start"><span class="mr-2">✔</span> Filename: FirstName_LastName_CV_2026.docx</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        function switchTab(tabName) {
+            // 1. Hide all content sections
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => {
+                content.classList.add('hidden');
+                content.classList.remove('block');
+            });
+
+            // 2. Show the selected content section
+            document.getElementById(tabName).classList.remove('hidden');
+            document.getElementById(tabName).classList.add('block');
+
+            // 3. Reset all buttons to inactive style
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(btn => {
+                btn.classList.remove('active-tab');
+                btn.classList.add('inactive-tab');
+            });
+
+            // 4. Set active button style
+            const activeBtn = document.getElementById('btn-' + tabName);
+            activeBtn.classList.remove('inactive-tab');
+            activeBtn.classList.add('active-tab');
+        }
+    </script>
+</body>
+</html>
